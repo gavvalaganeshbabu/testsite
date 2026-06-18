@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "home-page",
+      "urls": [
+        "https://www.kotak.bank.in/en/home.html"
+      ],
+      "representativeUrl": "https://www.kotak.bank.in/en/home.html",
+      "coverageGaps": [],
+      "description": "Kotak Mahindra Bank home page with header navigation, hero banner carousel, product/quick-link column controls, thin promotional carousel, icon slider, overlay promotional sections, and a rich multi-column footer.",
+      "blocks": [
+        {
+          "name": "header",
+          "instances": [
+            "body > header.header-container.search-results-cont.animated"
+          ]
+        },
+        {
+          "name": "carousel-hero",
+          "instances": [
+            "div.heroslider.section"
+          ]
+        },
+        {
+          "name": "cards-product",
+          "instances": [
+            "div.white-background > div.columncontrol.section:nth-of-type(1)",
+            "div.white-background > div.columncontrol.section:nth-of-type(2)"
+          ]
+        },
+        {
+          "name": "carousel-promo",
+          "instances": [
+            "div.white-background > div.thincarousalbanner.section"
+          ]
+        },
+        {
+          "name": "columns-feature",
+          "instances": [
+            "div.white-background > div.columncontrol.section:nth-of-type(4)"
+          ]
+        },
+        {
+          "name": "cards-story",
+          "instances": [
+            "div.white-background > div.parsys.section:nth-of-type(6)"
+          ]
+        },
+        {
+          "name": "carousel-icons",
+          "instances": [
+            "div.white-background > div.parsys.section:nth-of-type(7) > div.iconslider.section"
+          ]
+        },
+        {
+          "name": "cards-quicklink",
+          "instances": [
+            "div.white-background > div.columncontrol.section:nth-of-type(8)",
+            "div.white-background > div.columncontrol.section:nth-of-type(9)"
+          ]
+        },
+        {
+          "name": "footer",
+          "instances": [
+            "body > footer.footer"
+          ]
+        }
+      ]
+    }
+  ]
+}

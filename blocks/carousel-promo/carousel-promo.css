@@ -1,0 +1,96 @@
+/*
+ * carousel-promo — thin full-width promotional banner carousel.
+ * Source: Kotak thin-carousal-banner (owl-carousel).
+ * Image-only rotating slides: wide thin strip (1100x200, ~5.5:1),
+ * object-fit cover, 12px rounded corners, centered red dot indicators,
+ * no visible prev/next arrows.
+ */
+
+.carousel-promo .carousel-promo-slides-container {
+  position: relative;
+}
+
+.carousel-promo .carousel-promo-slides,
+.carousel-promo .carousel-promo-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-promo .carousel-promo-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+  border-radius: 12px;
+}
+
+.carousel-promo .carousel-promo-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-promo .carousel-promo-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  position: relative;
+  width: 100%;
+}
+
+/* image-only thin banner strip: ~5.5:1 wide, modest height */
+.carousel-promo .carousel-promo-slide .carousel-promo-slide-image {
+  margin: 0;
+}
+
+.carousel-promo .carousel-promo-slide .carousel-promo-slide-image p {
+  margin: 0;
+  line-height: 0;
+}
+
+.carousel-promo .carousel-promo-slide .carousel-promo-slide-image a {
+  display: block;
+}
+
+.carousel-promo .carousel-promo-slide .carousel-promo-slide-image picture {
+  display: block;
+}
+
+.carousel-promo .carousel-promo-slide .carousel-promo-slide-image picture > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1100 / 200;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* dot indicators — small red circles, centered below the strip */
+.carousel-promo .carousel-promo-slide-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  line-height: 0;
+}
+
+.carousel-promo .carousel-promo-slide-indicator button {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgb(255 0 0);
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.carousel-promo .carousel-promo-slide-indicator button:disabled,
+.carousel-promo .carousel-promo-slide-indicator button:hover,
+.carousel-promo .carousel-promo-slide-indicator button:focus-visible {
+  background-color: rgb(255 0 0);
+}
+
+/* source thin banner hides prev/next arrows (owl-nav disabled) */
+.carousel-promo .carousel-promo-navigation-buttons {
+  display: none;
+}

@@ -1,0 +1,39 @@
+{
+  "variantName": "carousel-hero",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-06-18T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.kotak.bank.in/en/home.html",
+    "originPage": "Kotak Mahindra Bank home page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + line + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "full-width hero banner carousels",
+      "homepage promotional banner rotators",
+      "campaign landing banners with overlay text"
+    ],
+    "notSuitableFor": [
+      "thin image-only promo strips",
+      "compact icon sliders",
+      "static single banners"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/home"],
+    "reuseCount": 1,
+    "lastUsed": "2026-06-18T00:00:00.000Z"
+  }
+}
