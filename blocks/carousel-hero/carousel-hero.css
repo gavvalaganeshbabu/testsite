@@ -1,0 +1,130 @@
+.carousel-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-hero-slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-hero-slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.carousel-hero-slide picture,
+.carousel-hero-slide img {
+  display: block;
+  width: 100%;
+}
+
+.carousel-hero-slide img {
+  height: 520px;
+  object-fit: cover;
+}
+
+.carousel-hero-slide > div:last-child {
+  position: absolute;
+  top: 50%;
+  left: 12%;
+  transform: translateY(-50%);
+  max-width: 650px;
+  z-index: 2;
+}
+
+.carousel-hero-slide h1,
+.carousel-hero-slide h2 {
+  margin: 0 0 16px;
+  color: #fff;
+  font-size: 4rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.carousel-hero-slide p {
+  margin: 0 0 24px;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.carousel-hero-slide a {
+  display: inline-block;
+  padding: 14px 36px;
+  background: #f04d23;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.carousel-hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: rgb(0 0 0 / 20%);
+  color: #fff;
+  cursor: pointer;
+  z-index: 5;
+  font-size: 24px;
+}
+
+.carousel-hero-prev {
+  left: 20px;
+}
+
+.carousel-hero-next {
+  right: 20px;
+}
+
+.carousel-hero-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.carousel-hero-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.carousel-hero-dot.active {
+  background: #fff;
+}
+
+@media (width <= 768px) {
+  .carousel-hero-slide img {
+    height: 420px;
+  }
+
+  .carousel-hero-slide > div:last-child {
+    left: 24px;
+    right: 24px;
+    max-width: none;
+  }
+
+  .carousel-hero-slide h1,
+  .carousel-hero-slide h2 {
+    font-size: 2.25rem;
+  }
+
+  .carousel-hero-slide p {
+    font-size: 1rem;
+  }
+
+  .carousel-hero-slide a {
+    padding: 12px 24px;
+  }
+}
