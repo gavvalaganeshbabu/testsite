@@ -36,7 +36,7 @@
 .carousel-hero-slide h1,
 .carousel-hero-slide h2 {
   margin: 0 0 16px;
-  color: #fff;
+  color: #ed1c24; /* Kotak Red */
   font-size: 4rem;
   line-height: 1.1;
   font-weight: 700;
@@ -44,8 +44,9 @@
 
 .carousel-hero-slide p {
   margin: 0 0 24px;
-  color: #fff;
+  color: #003366; /* Dark Blue */
   font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .carousel-hero-slide a {
