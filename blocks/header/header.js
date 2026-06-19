@@ -82,36 +82,53 @@ function buildMenu(section) {
   const menu = section.querySelector('ul');
   menu.className = 'nav-menu';
 
+  // Extract the leading text label of a list item and remove its source node.
+  // Handles both shapes: a bare text node (local plain.html) and a leading
+  // <p> wrapper that does not contain a link (DA/markdown-processed nav).
+  const takeLabel = (li) => {
+    const textNode = [...li.childNodes]
+      .find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+    if (textNode) {
+      const txt = textNode.textContent.trim();
+      textNode.remove();
+      return txt;
+    }
+    const labelP = [...li.children]
+      .find((c) => c.tagName === 'P' && !c.querySelector('a') && c.textContent.trim());
+    if (labelP) {
+      const txt = labelP.textContent.trim();
+      labelP.remove();
+      return txt;
+    }
+    return '';
+  };
+
   menu.querySelectorAll(':scope > li').forEach((li) => {
     const panel = li.querySelector(':scope > ul');
     if (panel) {
       li.classList.add('nav-has-panel');
       li.setAttribute('aria-expanded', 'false');
       // wrap the leading text label in a button-like span
-      const labelText = [...li.childNodes]
-        .find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
       const label = document.createElement('span');
       label.className = 'nav-label';
-      label.textContent = labelText ? labelText.textContent.trim() : li.firstChild.textContent.trim();
+      label.textContent = takeLabel(li);
       label.setAttribute('role', 'button');
       label.setAttribute('tabindex', '0');
-      if (labelText) labelText.remove();
       li.prepend(label);
       panel.className = 'nav-panel';
       // mark icon panels (those containing images) for grid layout
       if (panel.querySelector('img')) {
         panel.classList.add('nav-panel-icons');
-        // wrap each category group's leading text node (e.g. "Accounts") in a
+        // wrap each category group's leading label (text node or <p>) in a
         // heading span so it can be styled as a mega-menu column title
         panel.querySelectorAll(':scope > li').forEach((groupLi) => {
           if (!groupLi.querySelector(':scope > ul')) return;
-          const headText = [...groupLi.childNodes]
-            .find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
-          if (headText) {
+          const headTxt = takeLabel(groupLi);
+          if (headTxt) {
             const heading = document.createElement('span');
             heading.className = 'nav-panel-heading';
-            heading.textContent = headText.textContent.trim();
-            headText.replaceWith(heading);
+            heading.textContent = headTxt;
+            groupLi.prepend(heading);
           }
         });
       }
