@@ -169,10 +169,30 @@ async function submitForm(action, data) {
  * loads and decorates the form block
  * @param {Element} block the form block element
  */
+/**
+ * Normalise the authored definition reference to the JSON sheet URL.
+ * Handles DA/markdown link mangling where ".json" becomes "-json", links
+ * with no extension, and links that use the visible text instead of href.
+ * @param {Element} link the authored anchor (may be null)
+ * @returns {string|null} a fetchable .json URL
+ */
+function resolveDefinitionUrl(link) {
+  if (!link) return null;
+  // prefer href, but fall back to the link's visible text (often the real path)
+  let ref = link.getAttribute('href') || link.textContent || '';
+  ref = ref.trim();
+  if (!ref) return null;
+  // DA rewrites "/path.json" -> "/path-json": restore the extension
+  ref = ref.replace(/-json$/, '.json');
+  // ensure a .json extension so the sheet resolves
+  if (!/\.json($|\?)/.test(ref)) ref = `${ref.replace(/\/$/, '')}.json`;
+  return ref;
+}
+
 export default async function decorate(block) {
   // the form definition is linked in the first cell
   const link = block.querySelector('a[href]');
-  const defHref = link ? link.getAttribute('href') : null;
+  const defHref = resolveDefinitionUrl(link);
   block.textContent = '';
   if (!defHref) return;
 
