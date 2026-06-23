@@ -1,0 +1,117 @@
+/* Form block — labelled fields, validation, submit */
+
+.form {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.form .form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form .form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form .form-field input,
+.form .form-field textarea,
+.form .form-field select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  font-size: 15px;
+  color: #333;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form .form-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form .form-field input:focus,
+.form .form-field textarea:focus,
+.form .form-field select:focus {
+  outline: none;
+  border-color: #00005a;
+}
+
+.form .form-field input:invalid:not(:placeholder-shown),
+.form .form-field textarea:invalid:not(:placeholder-shown) {
+  border-color: #fa1432;
+}
+
+/* checkbox / radio groups */
+.form .form-field-group fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form .form-field-group legend {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  padding: 0 0 6px;
+}
+
+.form .form-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+
+/* submit */
+.form .form-field-submit {
+  margin-top: 4px;
+}
+
+.form .form-submit {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 30px;
+  background-color: #fa1432;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form .form-submit:hover {
+  background-color: #e0102c;
+}
+
+.form .form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* status message */
+.form .form-status {
+  font-size: 15px;
+}
+
+.form .form-status-success {
+  color: #1a7f37;
+}
+
+.form .form-status-error {
+  color: #fa1432;
+}
