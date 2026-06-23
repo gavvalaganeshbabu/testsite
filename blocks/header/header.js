@@ -64,11 +64,48 @@ function buildTools(section) {
     if (/login/i.test(label)) {
       a.className = 'nav-login';
       a.setAttribute('aria-label', 'Login');
+      tools.append(a);
     } else if (/search/i.test(label)) {
-      a.className = 'nav-search';
-      a.setAttribute('aria-label', 'Search');
+      // Replace the static search link with an expanding search control:
+      // clicking the icon reveals an input; submitting navigates to the
+      // search page with the query. The page path comes from the authored
+      // link href (e.g. /en/search.html), normalised to its clean URL.
+      const searchPath = (a.getAttribute('href') || '/en/search').replace(/\.html$/, '');
+      const wrapper = document.createElement('div');
+      wrapper.className = 'nav-search';
+
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'nav-search-toggle';
+      toggle.setAttribute('aria-label', 'Search');
+      toggle.setAttribute('aria-expanded', 'false');
+
+      const form = document.createElement('form');
+      form.className = 'nav-search-form';
+      form.action = searchPath;
+      form.setAttribute('role', 'search');
+      const input = document.createElement('input');
+      input.type = 'search';
+      input.name = 'q';
+      input.className = 'nav-search-input';
+      input.placeholder = 'Search';
+      input.setAttribute('aria-label', 'Search');
+      form.append(input);
+
+      toggle.addEventListener('click', () => {
+        const open = wrapper.classList.toggle('nav-search-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) input.focus();
+      });
+      form.addEventListener('submit', (e) => {
+        if (!input.value.trim()) e.preventDefault();
+      });
+
+      wrapper.append(toggle, form);
+      tools.append(wrapper);
+    } else {
+      tools.append(a);
     }
-    tools.append(a);
   });
   return tools;
 }
