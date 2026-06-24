@@ -148,16 +148,22 @@ function collectData(form) {
 
 /**
  * Submit the form data to its action endpoint.
+ * Most endpoints receive the standard EDS shape `{ data: {...} }`. Flat-JSON
+ * backends (e.g. Web3Forms at api.web3forms.com) expect the fields at the top
+ * level alongside an `access_key`; for those we send the flat payload.
  * @param {string} action endpoint URL
  * @param {Object} data submission payload
+ * @param {Object} [extra] extra top-level fields (e.g. { access_key })
  * @returns {Promise<boolean>} success
  */
-async function submitForm(action, data) {
+async function submitForm(action, data, extra = {}) {
+  const isFlat = /web3forms\.com|formspree\.io|getform\.io|api\.basin/i.test(action);
+  const body = isFlat ? { ...data, ...extra } : { data };
   try {
     const resp = await fetch(action, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data }),
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(body),
     });
     return resp.ok;
   } catch (e) {
@@ -204,7 +210,15 @@ export default async function decorate(block) {
   form.setAttribute('novalidate', '');
 
   let action = defHref;
+  const extra = {}; // top-level payload fields for flat backends (e.g. access_key)
   rows.forEach((row) => {
+    const name = (row.Name || row.name || '').trim();
+    const type = (row.Type || row.type || '').trim().toLowerCase();
+    // config/hidden rows carry values (e.g. access_key) but are not rendered
+    if (type === 'config' || type === 'hidden') {
+      if (name) extra[name] = (row.Value || row.value || '').trim();
+      return;
+    }
     const field = createField(row);
     if (field) form.append(field);
     const submitBtn = field && field.querySelector('.form-submit[data-action]');
@@ -225,7 +239,7 @@ export default async function decorate(block) {
     const button = form.querySelector('.form-submit');
     if (button) button.disabled = true;
     status.textContent = 'Submitting…';
-    const ok = await submitForm(action, collectData(form));
+    const ok = await submitForm(action, collectData(form), extra);
     status.textContent = ok
       ? 'Thank you! Your details have been submitted.'
       : 'Something went wrong. Please try again.';
