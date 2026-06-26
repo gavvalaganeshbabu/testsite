@@ -145,6 +145,19 @@ export default async function decorate(block) {
   container.append(slidesWrapper);
   block.prepend(container);
 
+  // Prioritise the first slide's image as the LCP candidate and defer the rest.
+  // Without fetchpriority="high" the hero loads late on throttled mobile, hurting LCP.
+  const slideImages = block.querySelectorAll('.carousel-hero-slide-image img');
+  slideImages.forEach((img, idx) => {
+    if (idx === 0) {
+      img.setAttribute('loading', 'eager');
+      img.setAttribute('fetchpriority', 'high');
+    } else {
+      img.setAttribute('loading', 'lazy');
+      img.removeAttribute('fetchpriority');
+    }
+  });
+
   if (!isSingleSlide) {
     bindEvents(block);
   }

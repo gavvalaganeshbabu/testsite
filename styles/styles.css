@@ -323,3 +323,10 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* hide stray loader.gif left in imported content */
+main img[src*="loader.gif"],
+main picture:has(img[src*="loader.gif"]),
+main p:has(img[src*="loader.gif"]) {
+  display: none;
+}
