@@ -84,6 +84,11 @@
   pointer-events: auto;
 }
 
+/* second slide sits on a dark image — use white text for contrast */
+.carousel-hero .carousel-hero-slide[data-slide-index='1'] .carousel-hero-slide-content {
+  color: #fff;
+}
+
 .carousel-hero .carousel-hero-slide .carousel-hero-slide-content h1,
 .carousel-hero .carousel-hero-slide .carousel-hero-slide-content h2,
 .carousel-hero .carousel-hero-slide .carousel-hero-slide-content h3 {
